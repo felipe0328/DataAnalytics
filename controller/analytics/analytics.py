@@ -2,6 +2,8 @@ from services import ExternalData
 import pandas as pd
 from io import StringIO
 from flask import json
+from dal.analitics.purchaseAnalitics import insert_new_analitics_entry
+import asyncio
 
 
 def analize_data_and_return_results() -> dict[str, str]:
@@ -31,8 +33,12 @@ def analize_data_and_return_results() -> dict[str, str]:
         [elementsPurchasedSubset['timestamp'].dt.hour, 'element_type'])
     elementsPurchasedByHour = elementsPurchasedAndGrouped.count()
 
+    purchasesByTypeJson = json.loads(purchasesByType.to_json(orient='index'))
+
+    insert_new_analitics_entry(purchasesByTypeJson)
+
     analizedData = {
-        'PurchaseByType': json.loads(purchasesByType.to_json(orient='index')),
+        'PurchaseByType': purchasesByTypeJson,
         'MoneyInvertedByHour': json.loads(moneyInvertedByHour.to_json()),
         'ElementsTypePurchasedCount': json.loads(purchaseElementCountData.purchase_amount.to_json()),
         'ElementsPurchasedByHour': json.loads(elementsPurchasedByHour.timestamp.to_json())
