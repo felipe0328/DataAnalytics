@@ -3,6 +3,7 @@ This example project gets a dataset from a aws lambda method, analizes the data 
 
 ## Table of contents
 * [Project Requirements](#project-requirements)
+* [Used Libraries](#used-libraries)
 * [How to run the project](#how-to-run-the-project)
 * [Project Diagram](#project-diagram)
 * [Database Diagram](#database-diagram)
@@ -11,6 +12,13 @@ This example project gets a dataset from a aws lambda method, analizes the data 
 * Python 3
 * Python Virtual Environments
 * SQL Server Database
+
+## Used Libraries
+* Flask
+* Pandas
+* SQL Alchemy
+* Pyodbc
+* Requests
 
 ## How to run the project
 
